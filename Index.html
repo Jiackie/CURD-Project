@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="list.css">
+
+</head>
+<body>
+  <h2>CRUD DEMO</h2>
+  <div id="insert">
+    <label>Add new to your list</label>
+    <form >
+      <input id = "inputcontent" type="text" placeholder="Write your input here">
+      <button type="button" name="submit" onclick="insertInList()">submit</button>
+    </form>
+  </div>
+
+  <div id="edit">
+    <label>Edit current list</label>
+    <form >
+      <input type="text" id = "updatedcontent">
+      <!-- How to put the origin staff here in myTextInput.value -->
+      <button type="button" class="yes" onclick="editedTheList()"> &#10004; </button>
+      <button type="button" class="no" onclick="cancelEdit()"> &#10008; </button>
+    </form>
+  </div>
+
+  <div class="main">
+    <label>List
+    </label>
+    <button id="sort" onclick="reverseTheListOrder()">&#8593;A-Z</button>
+
+    <ol id="list" type="1">
+      <li>Alaskan Klee Kai<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Barbet<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Basset Hound<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Beabull<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Beaglier<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li><li>Chiwawa
+        <button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Corgi<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Gollie<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Greyhound<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Huskita<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Labrador<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Matiff<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Pointer<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Pomchi<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Retriever<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Samoyed<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Shepherd<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Shorkie<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Shorkie<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Shichon<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Terrier<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+      <li>Terrier<button type="button" class="no" onclick="deleteTheList()">del</button>
+        <button type="button" class="yes" onclick="startEdit()">edit</button>
+      </li>
+
+
+    </ol>
+  </div>
+  <div id="pagination">
+    <!-- <button type="button" name="button">previous</button>
+    <button type="button" name="button">1</button>
+    <button type="button" name="button">2</button>
+    ...
+    <button type="button" name="button">3</button>
+    <button type="button" name="button">next</button> -->
+  </div>
+
+
+<script src="list.js"></script>
+
+</body>
+</html>

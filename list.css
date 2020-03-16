@@ -1,0 +1,155 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  flex-wrap: wrap;
+  background-color:#f7f7f7;
+
+  /* margin: 10px; */
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.5;
+}
+
+input {
+  font-size: 1em;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0px 5px;
+  overflow: visible;
+  color: #495057;
+  background-clip: padding-box;
+}
+
+div {
+  margin:10px;
+}
+
+label {
+  display: inline-block;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+button {
+  background-color: #007bff;
+  text-align: center;
+  border-color: #007bff;
+  border-radius: 0.25rem;
+  color: #fff;
+
+  width: 90px;
+  height: 34px;
+  font-size: 1em;
+  padding: 1px 0px;
+  overflow: visible;
+
+}
+
+button:hover {
+  background-color: #076ee3;
+  cursor: pointer;
+}
+.no {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.yes:hover {
+  background-color: #076ee3;
+}
+
+.no:hover {
+  background-color: #b5212f;
+}
+
+.yes:active, .no:active {
+  color: black;
+}
+
+#insert , #edit {
+  min-height: 9vh;
+  border-bottom: 1px solid #ced4da;
+}
+
+#insert form input, #edit form input{
+  height: 30px;
+  width: 250px;
+}
+
+#edit {
+  display: none;
+}
+
+#edit form button{
+  width: 42.5px;
+  padding: 0px;
+  margin-right: 1px;
+}
+
+#sort {
+  position:absolute;
+  float:right;
+  right:23%;
+  padding: 0px 8px;
+  height: 25px;
+  width: fit-content;
+  font-size: 0.7em;
+
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.main {
+  width: 349.19px;
+
+}
+
+#list li {
+  display: none;
+
+  padding: 5px 0px 5px 20px;
+  margin: 2px 0px;
+  border-bottom: 1px solid lightgrey;
+  min-height: 30px;
+}
+
+li:hover button {
+  opacity: 1;
+}
+
+
+li button {
+  float: right;
+
+  padding: 4px 8px;
+  margin:0px 2px;
+  width: 42.5px;
+  height:21px;
+  font-size: 0.7em;
+  opacity: 0;
+}
+
+#pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  width: 349.19px;
+}
+
+#pagination button {
+  width:auto;
+  font-size: 1em;
+  padding: 4px 8px;
+  margin:0px 0px 0px 4px;
+}
+
+/* show the active page */
+/* #pagination button:active {
+  background-color: #0353a8;
+} */
