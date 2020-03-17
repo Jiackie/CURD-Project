@@ -1,5 +1,7 @@
 let pageNum = 0;
 const pageSize = 10;
+let sortAscending = true;
+
 
 
 function insertInList() {
@@ -112,23 +114,38 @@ function deleteTheList() {
 function sortAndInsert(newItem) {
   let orderlist = document.getElementById('list');
   //compared with each value of the element;
-  for (let llist of orderlist.children) {
-    if (newItem.childNodes[0].textContent.trim().toLowerCase() < llist.childNodes[0].textContent.trim().toLowerCase()) {
-      orderlist.insertBefore(newItem, llist);
-      return;
-    };
-  };
-  orderlist.appendChild(newItem);
+  console.log(sortAscending);
+  if (sortAscending) {
+    for (let llist of orderlist.children) {
+      if (newItem.childNodes[0].textContent.trim().toLowerCase() < llist.childNodes[0].textContent.trim().toLowerCase()) {
+        orderlist.insertBefore(newItem, llist);
+        return;
+      }
+    }
+
+  } else {
+    for (let llist of orderlist.children) {
+      if (newItem.childNodes[0].textContent.trim().toLowerCase() > llist.childNodes[0].textContent.trim().toLowerCase()) {
+        orderlist.insertBefore(newItem, llist);
+        return;
+      }
+    }
+    orderlist.appendChild(newItem);
+  }
+
 }
 
 function reverseTheListOrder() {
   let orderChangeButton = document.getElementById('sort');
-  if (orderChangeButton.textContent[0]=== '\u2191'){
+  if (orderChangeButton.textContent[0] === '\u2191') {
     orderChangeButton.textContent = '\u2193A-Z';
+    sortAscending = false;
   } else {
     orderChangeButton.textContent = '\u2191A-Z';
+    sortAscending = true;
     // orderChangeButton.textContent[0] = '\u2191';
   };
+
   //reverse the order;
   let orderlist = document.getElementById('list');
   for (let i = 1; i < orderlist.children.length; i++) {
@@ -139,10 +156,10 @@ function reverseTheListOrder() {
 }
 
 //set pagination;
-window.onload = function() {
+window.onload = function () {
   paginationBar();
   showPageN(pageNum);
-}
+};
 
 function paginationBar() {
   let listNode = document.getElementById('list');
@@ -150,6 +167,7 @@ function paginationBar() {
 
   //remoce stored children of pagination;
   pageNode.innerHTML = '';
+  // console.log(listNode.children.length);
 
   //previous button
   let firstButton = document.createElement('button');
@@ -165,7 +183,7 @@ function paginationBar() {
   pageNode.appendChild(firstButton);
 
   //button for each page;
-  for (let i = 0; i < Math.ceil(listNode.children.length / pageSize); i++) {
+  for (let i = 0; i < Math.max(1,Math.ceil(listNode.children.length / pageSize)); i++) {
     let newButton = document.createElement('button');
     newButton.type = 'button';
     newButton.innerHTML = i + 1;
@@ -173,25 +191,27 @@ function paginationBar() {
       pageNum = Number(newButton.innerHTML) - 1;
       showPageN(pageNum);
     };
+
     pageNode.appendChild(newButton);
   }
-
-
 
   // next button;
   let lastButton = document.createElement('button');
   lastButton.type = 'button';
   lastButton.innerHTML = '>';
-  lastButton.onclick = function() {
-    if (pageNum === Math.ceil(listNode.children.length / pageSize) - 1) {
+  lastButton.onclick = function () {
+    if (pageNum === Math.ceil(listNode.children.length / pageSize) - 1 || listNode.children.length === 0) {
       alert('This is the last page.');
     } else {
       pageNum += 1;
       showPageN(pageNum);
-    }
-  };
+    }};
   pageNode.appendChild(lastButton);
+
+
 }
+
+
 
 function showPageN(pageNumber) {
   let listNode = document.getElementById('list');
@@ -207,14 +227,15 @@ function showPageN(pageNumber) {
   }
 
   let pageNode = document.getElementById('pagination');
-  for (let page = 0; page < pageNode.children.length; page++) {
-    // console.log(pageNode.children[page],pageNode.children
+  // if only one page, then only one button here;
+
+  for (let page = 0; page < pageNode.children.length - 1; page++) {
+    // console.log(pageNode.children[page],pageNode.children;
+    // console.log(pageNode.children[page]);
     if (page === pageNum + 1) {
-      // console.log(pageNode.children[page]);
       pageNode.children[page].style.backgroundColor = '#0229b5';
     } else {
       pageNode.children[page].style.backgroundColor = null;
     }
   }
-
 }
