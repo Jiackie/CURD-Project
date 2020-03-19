@@ -3,7 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction:column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   background-color:#f7f7f7;
 
   /* margin: 10px; */
@@ -25,7 +25,7 @@ input {
 
 div {
   margin:10px;
-  padding-bottom: 26px;
+  padding-bottom: 30px;
 }
 
 label {

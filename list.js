@@ -198,10 +198,71 @@ crudObj = {
       }
     };
     this.pageNode.appendChild(lastButton);
-  }
+  },
+
+  getURL: function (url) {
+    return new Promise(function (resolve, reject) {
+      let req = new XMLHttpRequest();
+      req.open('GET', url, true);
+      req.onload = function () {
+        if (req.status === 200) {
+          // console.log(req, 'res')
+          resolve(req.responseText);
+        } else {
+          reject(new Error(req.statusText));
+        }
+      };
+
+      req.onerror = function () {
+        reject(new Error(req.statusText));
+      };
+
+      req.send();
+    });
+  },
+
+  createListElement: function (title, releaseDate) {
+    //creat a new li element
+    let newList = document.createElement('li');
+    newList.innerHTML = title + '<br />(' + releaseDate + ')';
+
+    //add delete button to it;
+    let delbutton = document.createElement('button');
+    delbutton.type = 'button';
+    delbutton.className = 'no';
+    delbutton.innerHTML = 'del';
+    delbutton.onclick = () => crudObj.deleteTheList();
+    newList.appendChild(delbutton);
+
+    //add edit button to it;
+    let editbutton = document.createElement('button');
+    editbutton.type = 'button';
+    editbutton.className = 'yes';
+    editbutton.innerHTML = 'edit';
+    editbutton.onclick = () => crudObj.startEdit();
+    newList.appendChild(editbutton);
+
+
+    //sort to the right positon and insert;
+    this.sortAndInsert(newList);
+  },
 };
 
+
 window.onload = function () {
-  crudObj.paginationBar();
-  crudObj.showPageN(crudObj.pageNum);
+  let page = 1;
+  var URL = 'https://api.themoviedb.org/3/movie/top_rated?api_key=192609c7f94b658639a4a513b0421e27&language=en-US&page=' + page;
+  crudObj.getURL(URL).then(function onFulfilled(value) {
+    let resObj = JSON.parse(value);
+    // innerHTML
+    for (let i = 0; i < 20; i++) {
+      let movieItem = resObj.results[i];
+      crudObj.createListElement(movieItem.title, movieItem.release_date);
+    }
+
+    crudObj.paginationBar();
+    crudObj.showPageN(crudObj.pageNum);
+  }).catch(function onRejected(error) {
+    console.log(error);
+  });
 };
