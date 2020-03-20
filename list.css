@@ -23,7 +23,7 @@ input {
   background-clip: padding-box;
 }
 
-div {
+.mainPage div {
   margin:10px;
   padding-bottom: 30px;
 }
@@ -54,6 +54,21 @@ button:hover {
   background-color: #076ee3;
   cursor: pointer;
 }
+
+.mainPage h2:first-child {
+  margin-right: 30px;
+}
+
+#fav-btn {
+  float: right;
+  font-size: 10px;
+  background-color: #ffcb00;
+  width: 60px;
+  font-weight: bold;
+  background-size: 90px;
+  border-color: #ffcb00;
+
+}
 .no {
   background-color: #dc3545;
   border-color: #dc3545;
@@ -74,11 +89,12 @@ button:hover {
 #insert , #edit {
   min-height: 9vh;
   border-bottom: 1px solid #ced4da;
+  margin-right: 30px;
 }
 
 #insert form input, #edit form input{
   height: 30px;
-  width: 250px;
+  width: 270px;
 }
 
 #edit {
@@ -105,8 +121,13 @@ button:hover {
 }
 
 .main {
-  width: 349.19px;
+  width: 400.19px;
 
+}
+
+.hint {
+  color:#86878a;
+  font-weight: bold;
 }
 
 #list li {
@@ -126,6 +147,14 @@ li:hover button {
   opacity: 1;
 }
 
+#list li.fav::before, #list li:hover::before {
+  content: '\2605';
+  color: #ffcb00;
+}
+
+#list li.fav:hover::before {
+  content: '\2606';
+}
 
 li button {
   float: right;
@@ -154,7 +183,32 @@ li button {
   margin:0px 0px 0px 4px;
 }
 
-/* show the active page */
-/* #pagination button:active {
-  background-color: #0353a8;
-} */
+.modal {
+  display: none;
+  position: fixed;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
+  width: 75%;
+}
+
+.close-btn {
+  float: right;
+  color: lightgray;
+  font-size: 24px;
+  font-weight: bold;
+}
+.close-btn:hover {
+  color: darkgray;
+}

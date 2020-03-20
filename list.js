@@ -3,13 +3,18 @@ crudObj = {
   sortAscending: true,
   pageSize: 10,
 
+  //get favorites from local storage or an empty object;
+  favorites: JSON.parse(localStorage.getItem('favorites')) || [],
   inputVal: document.getElementById('inputcontent'),
   listNode: document.getElementById('list'),
   updateVal: document.getElementById('updatedcontent'),
   editDiv: document.getElementById('edit'),
   orderChangeButton: document.getElementById('sort'),
+  favoriteContent: document.getElementById('favoriteList'),
   pageNode: document.getElementById('pagination'),
   editElement: null,
+  closeBtn: document.querySelector('.close-btn'),
+  modal: document.querySelector('.modal'),
 
   insertInList: function () {
     //check if input is NULL;
@@ -21,6 +26,7 @@ crudObj = {
     //creat a new li element
     let newList = document.createElement('li');
     newList.innerHTML = this.inputVal.value;
+    newList.id = this.inputVal.value;
     // let textNode = document.createTextNode(this.inputVal.value);
     // newList.appendChild(textNode);
 
@@ -42,6 +48,8 @@ crudObj = {
 
     //sort to the right positon and insert;
     this.sortAndInsert(newList);
+
+    this.addFavorites();
 
     //call pagination.
     this.paginationBar();
@@ -110,6 +118,7 @@ crudObj = {
 
   deleteTheList: function () {
     this.editElement = event.srcElement.parentElement;
+    this.favorites.splice(this.favorites.indexOf(this.editElement.id), 1);
     this.editElement.remove();
     this.paginationBar();
     this.showPageN(this.pageNum);
@@ -224,7 +233,8 @@ crudObj = {
   createListElement: function (title, releaseDate) {
     //creat a new li element
     let newList = document.createElement('li');
-    newList.innerHTML = title + '<br />(' + releaseDate + ')';
+    newList.innerHTML = title + ' (' + releaseDate + ')';
+    newList.id = title;
 
     //add delete button to it;
     let delbutton = document.createElement('button');
@@ -246,8 +256,57 @@ crudObj = {
     //sort to the right positon and insert;
     this.sortAndInsert(newList);
   },
-};
 
+  addFavorites: function () {
+    //add fav class to favorite lists;
+    for (let item of this.favorites) {
+      document.getElementById(item).className = 'fav';
+    }
+
+    //click evernt generation;
+    document.querySelector('#list').addEventListener('click', function (event) {
+      // console.log(event);
+      let id = event.target.id,
+          target = event.target,
+          index = crudObj.favorites.indexOf(id);
+
+      if (!id) return;
+
+      if (index === -1) {
+        crudObj.favorites.push(id);
+        console.log(crudObj.favorites);
+        target.className = 'fav';
+      } else {
+        crudObj.favorites.splice(index, 1);
+        console.log(crudObj.favorites);
+        target.className = '';
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(crudObj.favorites));
+    });
+  },
+
+  showModal: function () {
+    this.modal.style.display = 'block';
+    console.log(this.favoriteContent.children);
+    while (this.favoriteContent.hasChildNodes()) {
+      this.favoriteContent.removeChild(this.favoriteContent.firstChild);
+    }
+      
+    for (let item of this.favorites) {
+      let newList = document.createElement('p');
+      newList.innerHTML = item;
+      crudObj.favoriteContent.appendChild(newList);
+    }
+
+  },
+
+  closeButton: function () {
+    this.closeBtn.onclick = function () {
+      crudObj.modal.style.display = 'none';
+    };
+  },
+};
 
 window.onload = function () {
   let page = 1;
@@ -259,10 +318,21 @@ window.onload = function () {
       let movieItem = resObj.results[i];
       crudObj.createListElement(movieItem.title, movieItem.release_date);
     }
-
     crudObj.paginationBar();
     crudObj.showPageN(crudObj.pageNum);
-  }).catch(function onRejected(error) {
+    crudObj.addFavorites();
+  })
+  .catch(function onRejected(error) {
     console.log(error);
   });
+};
+
+window.onclick = function(element) {
+  if (element.target == crudObj.modal) {
+    crudObj.modal.style.display = 'none';
+  }
+};
+
+crudObj.closeBtn.onclick = function () {
+  crudObj.modal.style.display = 'none';
 };
